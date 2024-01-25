@@ -65,7 +65,7 @@
                         
                         <div class="col-12 text-right">                            
                             <input type="submit" value="Enviar" name="enviar" class="btn btn-primary"/>
-                            <a href="/proveedores" class="btn btn-danger ml-3">Cancelar</a>                            
+                            <a href="/usuarios-sistema" class="btn btn-danger ml-3">Cancelar</a>                            
                         </div>
                     </div>
                 </form>

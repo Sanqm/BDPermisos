@@ -38,8 +38,8 @@ class UsuarioSistemaController extends \Com\Daw2\Core\BaseController {
             'idiomas' => $idiomas,
             'roles' =>$roles,
             'email' =>$modelo->getEmailFiltter($_POST),
-            'input' =>$input
-            
+           
+
         );
 
         $this->view->showViews(array('templates/header.view.php', 'formularioAlta.view.php', 'templates/footer.view.php'), $data);
