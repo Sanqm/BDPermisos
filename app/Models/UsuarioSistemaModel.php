@@ -12,11 +12,15 @@ class UsuarioSistemaModel extends \Com\Daw2\Core\BaseModel {
         return $this->pdo->query(self::SELECT_FROM)->fetchAll();
     }
     
-    function getEmailFiltter(array $filtros){
+    function getEmailFiltter(array $filtros) :string {
        
        if(isset($filtros['email']) && !empty($filtros['email']) ){
-            return  filter_var($filtros['email'],FILTER_VALIDATE_EMAIL) ? true: false;
+           
+           if(filter_var($filtros['email'],FILTER_VALIDATE_EMAIL)){
+               return "";
+           }
+           
        }
-       
+        return "Mail introducido incorrecto";
     }
 }

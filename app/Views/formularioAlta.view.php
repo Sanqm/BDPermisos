@@ -22,7 +22,7 @@
                             <label for="email">EMAIL</label>
                             <input class="form-control" id="email" type="email" name="email" placeholder="Email" value="<?php echo isset($input['email']) ? $input['email'] : ''; ?>" required>
                             
-                            <p class="text-danger"><?php echo isset($email['email']) && $email['email'] ===true  ? "Email Correcto" : "Incorrecto"; ?></p>
+                            <p class="text-danger"><?php echo !empty($input['mail']) && empty($email)  ? $email : " "; ?></p>
                                    
                         </div>
                         <div class="mb-3 col-sm-6">
