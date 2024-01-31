@@ -189,9 +189,30 @@ class FrontController {
         Route::add('/usuarios-sistema/add',
                 function () {
                     $controlador = new \Com\Daw2\Controllers\UsuarioSistemaController();
-                    $controlador->editar();
+                    $controlador->mostrarAdd();
                 }
                 , 'get');
+
+        Route::add('/usuarios-sistema/add',
+                function () {
+                    $controlador = new \Com\Daw2\Controllers\UsuarioSistemaController();
+                    $controlador->processAdd();
+                }
+                , 'post');
+
+         Route::add('/usuarios-sistema/edit/([0-9]+)',
+                function ($id) {
+                    $controlador = new \Com\Daw2\Controllers\UsuarioSistemaController();
+                    $controlador->mostraredit($id);
+                }
+                , 'get');        
+                
+        Route::add('/usuarios-sistema/edit/([0-9]+)',
+                function ($id) {
+                    $controlador = new \Com\Daw2\Controllers\UsuarioSistemaController();
+                    $controlador->editAdd($id);
+                }
+                , 'post');
 
         Route::pathNotFound(
                 function () {

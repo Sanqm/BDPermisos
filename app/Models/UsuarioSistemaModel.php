@@ -12,30 +12,68 @@ class UsuarioSistemaModel extends \Com\Daw2\Core\BaseModel {
         return $this->pdo->query(self::SELECT_FROM)->fetchAll();
     }
 
-    function getEmailFiltter(array $filtros): string {
-
-        if (isset($filtros['enviar'])) {
-            var_dump($filtros);
+    /**
+     * 
+     * @param array $data 
+     * @return int 0 si hay algún error. El id autogenerado en caso de éxito.
+     */
+    function insertUsuarioSistema(array $data): int {
+        $query = "INSERT INTO usuario_sistema (id_rol, email, pass, nombre, id_idioma) VALUES(:id_rol, :email, :pass, :nombre, :id_idioma)";
+        $stmt = $this->pdo->prepare($query);
+        $vars = [
+            'id_rol' => $data['id_rol'],
+            'email' => $data['email'],
+            'pass' => password_hash($data['pass'], PASSWORD_DEFAULT),
+            'nombre' => $data['nombre'],
+            'id_idioma' => $data['id_idioma']
+        ];
+        if ($stmt->execute($vars)) {
+            return (int) $this->pdo->lastInsertId();
+        } else {
+            return 0;
         }
-
-
-
-        if (isset($filtros['email']) && !empty($filtros['email'])) {
-
-            if (filter_var($filtros['email'], FILTER_VALIDATE_EMAIL)) {
-                return "";
-            }
-        }
-        return "Mail introducido incorrecto";
     }
 
-    function getValidatePas($filtros) {
-        $pwd1 = $filtros['pwd1'];
-       
-        if (preg_match('/^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-])[A-Za-z\d!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]{8,}$/', $pwd1)) {
-            echo "La contraseña cumple con los criterios.";
+    function loadByEmail(string $email): ?array {
+        $query = "SELECT * FROM usuario_sistema WHERE email = ?";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute([$email]);
+        if ($row = $stmt->fetch()) {
+            return $row;
         } else {
-            echo "La contraseña no cumple con los criterios.";
+            return null;
+        }
+    }
+
+    function editUsuarioSistema(array $data): int {
+        $query = "UPDATE usuario_sistema SET email=? WHERE id_usuario=?";
+        $stmt = $this->pdo->prepare($query);
+
+        if ($stmt->execute($data['email'], $data['id'])) {
+            return (int) $stmt->rowCount()<=1;
+        } else {
+            return 0;
+        }
+    }
+
+    function getEditUser(int $id): ?array {
+        $stmt = $this->pdo->prepare('SELECT * FROM usuario_sistema us  WHERE id_usuario=?');
+        $stmt->execute([$id]);
+        if ($row = $stmt->fetch()) {
+            return $row;
+        } else {
+            return null;
+        }
+    }
+
+    function getEditEmail(array $data, int $id): ?array {
+        $stmt = $this->pdo->prepare("SELECT * FROM usuario_sistema us WHERE us.email =? AND us.id_usuario !=?");
+        $stmt->execute([$data['email'], $id]);
+        
+        if ($row = $stmt->fetch()) {
+            return $row;
+        } else {
+            return null;
         }
     }
 

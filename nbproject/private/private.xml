@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/D:/Xampp/htdocs/BDPermisos/app/Controllers/UsuarioSistemaController.php</file>
+            <file>file:/D:/Xampp/htdocs/BDPermisos/app/Views/formularioAlta.view.php</file>
+            <file>file:/D:/Xampp/htdocs/BDPermisos/app/Models/AuxUsuarioModel.php</file>
+            <file>file:/D:/Xampp/htdocs/BDPermisos/app/Models/AuxRolModel.php</file>
+            <file>file:/D:/Xampp/htdocs/BDPermisos/app/Models/UsuarioSistemaModel.php</file>
+            <file>file:/D:/Xampp/htdocs/BDPermisos/app/Core/FrontController.php</file>
+        </group>
+    </open-files>
+</project-private>
