@@ -21,6 +21,4 @@ class AuxRolModel extends \Com\Daw2\Core\BaseModel{
             return null;
         }
     }
-    
-    
 }

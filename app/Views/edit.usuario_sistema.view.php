@@ -9,7 +9,7 @@
             </div>
             <!-- Card Body -->
             <div class="card-body">
-                <form action="<?php echo $seccion; ?>" method="post">         
+                <form action="" method="post">         
                     <!--form method="get"-->
                     <div class="row">
                         <div class="mb-3 col-sm-6">

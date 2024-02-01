@@ -7,14 +7,14 @@ use Steampixel\Route;
 class FrontController {
 
     static function main() {
-
+            
         Route::add('/',
-                function () {
-                    $controlador = new \Com\Daw2\Controllers\InicioController();
-                    $controlador->index();
-                }
-                , 'get');
-
+            function () {
+                $controlador = new \Com\Daw2\Controllers\InicioController();
+                $controlador->index();
+            }
+            , 'get');                           
+                                              
         # Gestion de categorías           
         Route::add('/categorias',
                 function () {
@@ -31,11 +31,11 @@ class FrontController {
                 , 'get');
 
         Route::add('/categorias/delete/([A-Za-z0-9]+)',
-                function ($id) {
-                    $controlador = new \Com\Daw2\Controllers\CategoriaController();
-                    $controlador->delete($id);
-                }
-                , 'get');
+            function ($id) {
+                $controlador = new \Com\Daw2\Controllers\CategoriaController();
+                $controlador->delete($id);
+            }
+        , 'get');
 
         Route::add('/categorias/edit/([A-Za-z0-9]+)',
                 function ($id) {
@@ -71,7 +71,7 @@ class FrontController {
                     $controlador->cant_add();
                 }
                 , 'get');
-
+                
         # Gestion de productos
         Route::add('/productos',
                 function () {
@@ -86,12 +86,14 @@ class FrontController {
                 }
                 , 'get');
 
+
         Route::add('/productos/delete/([A-Za-z0-9]+)',
                 function ($codigo) {
                     $controlador = new \Com\Daw2\Controllers\ProductoController();
                     $controlador->delete($codigo);
                 }
                 , 'get');
+
 
         Route::add('/productos/edit/([A-Za-z0-9]+)',
                 function ($codigo) {
@@ -144,6 +146,7 @@ class FrontController {
                 }
                 , 'get');
 
+
         Route::add('/proveedores/edit/([A-Za-z0-9]+)',
                 function ($cif) {
                     $controlador = new \Com\Daw2\Controllers\ProveedorController();
@@ -178,47 +181,63 @@ class FrontController {
                     $controlador->cant_add();
                 }
                 , 'get');
-
+                
         Route::add('/usuarios-sistema',
                 function () {
                     $controlador = new \Com\Daw2\Controllers\UsuarioSistemaController();
                     $controlador->mostrarTodos();
                 }
                 , 'get');
-
+                
         Route::add('/usuarios-sistema/add',
                 function () {
                     $controlador = new \Com\Daw2\Controllers\UsuarioSistemaController();
                     $controlador->mostrarAdd();
                 }
                 , 'get');
-
+                
         Route::add('/usuarios-sistema/add',
                 function () {
                     $controlador = new \Com\Daw2\Controllers\UsuarioSistemaController();
                     $controlador->processAdd();
                 }
                 , 'post');
-
+                
          Route::add('/usuarios-sistema/edit/([0-9]+)',
                 function ($id) {
                     $controlador = new \Com\Daw2\Controllers\UsuarioSistemaController();
-                    $controlador->mostraredit($id);
+                    $controlador->mostrarEdit((int)$id);
                 }
-                , 'get');        
+                , 'get');
                 
         Route::add('/usuarios-sistema/edit/([0-9]+)',
                 function ($id) {
                     $controlador = new \Com\Daw2\Controllers\UsuarioSistemaController();
-                    $controlador->editAdd($id);
+                    $controlador->processEdit((int)$id);
                 }
                 , 'post');
 
-        Route::pathNotFound(
-                function () {
-                    $controller = new \Com\Daw2\Controllers\ErroresController();
-                    $controller->error404();
+         Route::add('/usuarios-sistema/delete/([0-9]+)',
+                function ($id) {
+                    $controlador = new \Com\Daw2\Controllers\UsuarioSistemaController();
+                    $controlador->deleteUsuarioSistema((int)$id);
                 }
+                , 'get');
+                
+//        Route::add('/usuarios-sistema/delete/([0-9]+)',
+//                function ($id) {
+//                    $controlador = new \Com\Daw2\Controllers\UsuarioSistemaController();
+//                    $controlador->deleteUsuarioSistema((int)$id);
+//                }
+//                , 'post');        
+//                
+                
+
+        Route::pathNotFound(
+            function () {
+                $controller = new \Com\Daw2\Controllers\ErroresController();
+                $controller->error404();
+            }
         );
 
         Route::methodNotAllowed(
